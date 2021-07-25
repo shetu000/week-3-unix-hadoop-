@@ -1,0 +1,309 @@
+20/07/2021--> whole day project-0 presentation
+----------------------------------------------
+******21/07/2021******** 
+
+[2:20:00 3rd day of week 3]-[3:09:00]
+[4:34:28-4:53:10]
+[5:30:50-4:04:00]
+next video 
+[09:00 - 1:20:02]
+---------------------------------------------
+
+1.download the oracle vertual machine
+2. download the hortonworks sandbox.ova file 
+(link : 
+
+
+------------------------------------
+#after that import sandbox.ova to your oracl vm.
+
+steps:
+open oracle vm->File->import Appliance-> browse the sandbox.obv downloaded file.
+(/note: wait untill import finishes, it will take some time)
+
+------------------------------------
+#how to run 
+
+step-1: open oracle vm
+step-2: start your sandbox vm
+step-3: go to crome browser and type -> http://localhost:1080/splash.html#
+(it will open the hornonworks vm than click on launch and than give password and username both as "maria_dev" , beause maria_dev is a default account by sandbox, 
+they have another user called ruser. we can set password of our own as root user )
+
+
+#--------->important work<-------------(we have to map on thing in our local machine, without this sandbox will not open on browser  "hsandbox-hdp.hortonworks.com")
+hsandbox-hdp.hortonworks.com
+
+open C drive -> open windows folder here -> system 32->drivers->etc->hosts    (path : C:\Windows\System32\drivers\etc)
+open host file here (note : we can not change our hostfile from here so follow plan-B)
+****plan-B****
+type notepad on search bar like normal
+run as administrater
+after that click on file -> open-> browse the path (C:\Windows\System32\drivers\etc) and select host .
+now the content of host file will be on notepad 
+now add your new host in it 
+go to the last line of notepad (that has hostfile content in it)
+and just type this -> 127.0.0.1 localhost sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com
+and save it(make sure now the host file contain your new host that you just added i.e  127.0.0.1 localhost sandbox-hdp.hortonworks.com sandbox-hdf.hortonworks.com
+
+------------------------------------
+
+#Hadoop work( video time : 1:30:00 on 3rd day of week 3) 
+
+
+now open git bash cmd
+type-> ssh (Enter)
+type -> ssh root@sandbox-hdp.hortonworks.com -p 2222(Enter-> it will ask your password )(whenever you will login first time , you have to change your password)
+type ->"hadoop" (By deafult hadoop is the password)(now it will ask your new passworad , change and add your own password , in case of my root user password is my common password)
+
+
+***we can do this same thing in another way****
+open crome and type-> http://localhost:4200/ 
+it is a shell 
+it will work same as git bash
+
+----------------------------------------
+
+#two user : (open git cmd and paste accordingly and it will connect as root user or maria_dev user)
+
+1. ssh root@sandbox-hdp.hortonworks.com -p 2222 
+  password : my common password
+
+2.ssh maria_dev@sandbox-hdp.hortonworks.com -p 2222
+  password : maria_dev
+
+-------------------------------------------
+-------------------------------------------------------------------------------------------------------------------------------------------------
+							unix-linux command
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+open git bash cmd and connect as maria_dev user after that type all below command 
+
+# how to find currently you are in which directory?
+type-> pwd 
+
+# windows directory looks like  -> C:\users\asus
+ linux/ubuntu direstory is like -> /home/maria_dev
+
+(in windows every folder is within 'users' but in case of linux it is under 'home')
+
+[2:20:00 3rd day of week 3]-[3:09:00]
+[4:34:28-4:53:10]
+[5:30:50-4:04:00]
+1.Commands:
+	pwd : shows you are in which directory currently(pwd= present working directory)
+	ls : stands for list ( it is similar as widows command 'dir') it will show all the file name which are there in current folder [everything in white colour is files ,blue colour is directory and red is jar files]
+	ls -l : it will show file name as long format[like size of files , created date , read-write permission etc]
+
+rwxrwxrwx : here x stands for execute ( if user has x i.e they have permissions to execute this file)
+-rw-rw-r-- : that means user has no right to execute this file
+drwxrwxr : d represents directory  , if d comes in from of it rwxrwxrwx than it represtns that this is a directory
+	
+	#hidden files starts with a dot(.) in both windows and linux
+        
+	ls -a : show you hidden files or folder i.e starts with .
+	ls -al : show you hidden files or folder in long format
+	cd . : shows you current directory like pwd ( home/maria_dev)
+	cd ..: takes you to your parent directory from current directory(home/)
+	mkdir ./first: make directory named as first
+	cd first : it go to the first directory
+	cd second:
+	--[creates first and second sub directories]-----
+	mkdir ./first : 
+	mkdir ./first /second :
+	-------------------------------------------------- 
+	mkdir -p ./dir1/dir2/dir3 : dir 1 itself was not there previously so if we want to create dir3 under dir1 it will show error but using '-p' it will not going to show error , it simply created dir3 under dir2 and dir2 under dir1
+				    [ it this directory doesnot exists it will create it]
+	--------------------------------------------------
+	echo $PATH : we can check the path [PATH is an environment veriable]
+	echo $LOGNAME:
+	ls > files.txt : this > symbol is used for redirection , whatever is the output of ls will be redirect to first.txt [output> target(first.txt)]
+	cat files.txt : it will display the content of files.txt
+	again if we write ls> files.txt , it will overwrite the content
+	
+	ls / >> files.txt : but it will not overwrite , it will append the new content to the file[ here / stands for the root folder]
+	ls / : it will show all files and folder which are in root directory
+	ls -l / :
+	cat > files2.txt:
+	cat files2.txt > dummyfiles.txt : read the contant of files2.txt and redirect it to dummyfiles.txt
+	cat files2.txt dummyfiles.txt  :
+	echo "this is a sample line" >files3.txt : it will create files3.txt with the content
+	
+	------------------------------------------------------
+	less files1.txt : same as cat but it is kind of editor , we have to press 'q' for exit /quit ; press 'enter ' it will go to the next line ; press 'spacebar ' it will go to the next page
+	ls -l | less :
+				less commands :
+					q:quit
+					Enter : next line
+					SpaceBar: next page
+					p : previous page
+	
+	ls -F : wherever / is present at the end ,it is called a diretory , that is what -F does
+	ls -r: it will show file/folder name in decending order
+	ls -R :it will go recursively in all the directories of current directories and shws the contents of directories as well
+	ls -R | less :
+	less --help :
+	alias ls='ls -l' : we can create shortcut like this so whenever we type ls it will show result of 'ls -l'
+	unalias ls: untill unless we unalise this it will ramin in my system forever
+	ls *.txt: it will display all txt files
+	cp ./files.txt ./dir1/files.txt : it will copy files.txt in dir1
+	rm files.txt : remove files [it will prompt -> type 'y' and Enter]
+	
+	-------------------------------------------------------------------
+	cat > somefile.txt : creates a new file named somefile.txt and type some contents like 'unix is a os. unix is free os'. 
+	grep " unix" somefile.txt : it will search for the word 'unix' from somefiles.txt
+	grep -i "unix" somefile.txt : -i means ignore case , so it will show all the word of unix that contain letters caps or small 
+	ls | grep "somefiles":
+	grep -c "unix" somefiles.txt : -c will counts of lines that containt the word linux
+	grep -c -i "unix" somefiles.txt" :
+	grep -c "unix" somefiles.txt files.txt file2.txt: it will search in multiple files ( in somefiles.txt , files.txt and files2.txt)
+	
+	grep -c "unix" * : means search in all files
+	grep -l "unix" * : it searches only searches fol the file name which contain unix word, it give only file names
+	grep -w "unix" somefiles.txt: -w maches only whole word. ex- okunix ,it will not match
+	grep -o "unix" somefiles.txt: -o will list all the occurance of the word unix
+	grep -n "unix" somefiles.txt: -n will give you the line number
+	grep -v "unix" somefiles.txt : -v stands for inverse i.e where the unix word is not found
+	grep "^unix" somefiles.txt : regex expression i.e display the line that starts with the word unix
+	grep "unix$" somefiles.txt : line ends with unix
+	grepb"os\.$" somefiles.txt:
+	grep -e "unix" -e "Unix" -e "uNix" somefiles.txt :  searches for tripple words . you can give multiple expression using -e
+	grep -f pattern.txt somefiles.txt : -f represents file( create a file names pattern.txt and contant should be a word (ex-unix) and it will search does the soefiles.txt contain the content of pattern.txt )
+	grep -A1 "unix" somefiles.txt :
+	grep -A2 "Unix" somefiles.txt : seaching the line that contaun Unix word and also display next 2  lines
+	grep -C1 "unix" somefiles.txt : -c means before and after
+	grep -B1 "unix" somefiles.txt : -B is before that line
+	cat /etc/passwd : it will show all the users created in your system
+	ls /etc -l : /etc is most important folder in unix
+	-----------------------------------------------------------------------
+	vi is a editor 
+	-----------------------------------------------------------------------
+	type -> vi (Enter: it will open vi editor and you can type some lines here)
+	---------------------------------------------------------------------------
+	every file has three groups :
+				rwx-rwx-rwx
+				group1-group2-group3
+				owner-groups-others
+	----------------------------------------------------------------------------
+	
+	chown [options] user[:group] file(s) : change the ownership
+	chown shetu:projectrevature ./projectfolder/* : it will change the ownership 
+	chown shetu: ./projectfolder/* : we can also write like this , in case of this group will be shetu itself
+	------------------------------------------------------------------------------
+	******chmod : change mode*******	
+	
+	chmod [reference][operator][mode] file(s)
+	references:
+ 		u- owner
+		g- group
+		o- other'
+		a- all (i.e owner,group, other)
+	operator:
+		+ -add the specified mode to the specified classes
+		- -remove the specified mode to the specified classes
+		= -the modes specified are the exact modes that are set for the specific classes
+	modes:
+		r w x
+
+	Examples:
+	1. beforw : -rw-rw-r-- file1
+		chmod u=r file1
+	after : -r--rw-r-- file1
+
+	2.drwxrwxr-x file1
+		chmod u=rw file1
+	after : drw-rwx-r-x file1
+
+	3. Before :-rwxrwxr-x file1
+		chmod a-x file1
+	after: -rw-rw-r--
+	----------------------------------------------------------------------------------
+	permissions can also be given using numbers , octal numbers:
+		x:1
+		w:2
+		r:4
+
+	1.chmod 600 file1 : it has read and write permission(2+4) of owner 6-0-0(owner-group-others)
+	2.chmod 666 file1 :everyone has read and write permissions
+		3(1+2)= x+w
+		7(1+2+4)=r+w+x
+	------------------------------------------------------------------------------------
+	*****************another program************
+		cat> hello.sh
+		#!bin/bash           [it is called "shebang" line which indicates which line to use, it is the first line of shell script]
+		echo "hello world"
+		ls
+		date
+
+		^c
+		cat hello.sh(it will display the content of hello.sh file)
+	--------------------------------------------------------------------------------------
+	ls -l hello.sh
+	bash hello.sh
+	chmod 766 hello.sh (it will give read and write permission to hello.sh)
+	
+	---------------------------------------------------------------------------------------
+	chmod +x hello.sh :+x gives permission to execute all files
+	---------------------------------------------------------------------------------------	
+	
+
+
+		
+
+
+	
+	
+	
+	
+	
+
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+		
+	 
+	
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+gg
+
+
