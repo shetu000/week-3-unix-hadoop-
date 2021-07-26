@@ -1,0 +1,43 @@
+project 1 link : https://github.com/AjaySingala/P2-MovieLens.git
+
+
+--------------------------------------------------------------------------------
+********url of download text files of books ********
+
+www.gutenberg.org/etex/20417
+
+(here you will get e-books in text format)
+copy the content of e-book and save it to a notepad
+
+-----------------------------------------------------------------------------------
+
+1. how to copy file in hdfs from local machine ?
+ hdfs dfs -put ./TheNoteBooksoftLoeonardoDaVinchi.txt /temp/gutenberg              [here './TheNoteBooksoftLoeonardoDaVinchi.txt ' this is file name/location of local machine and /temp/gutenberg is file location on hadoop where we going to  save this file]
+or
+ hdfs dfs -CopyFromLocal ./TheNoteBooksoftLoeonardoDaVinchi.txt  /temp/gutenberg
+
+----------------------------------------------------------------------------------
+2.how to download e-boook using maria_dev cmd?
+go to a particular folder than enter
+-> vi 5000-8.txt (here 5000-8.txt is file name)
+-> wget https://www.gutenberg.org/files/5000/5000-8.txt
+
+(it will download the e-book locally)
+
+------------------------------------------------------------------------------------
+3. how to see the output file content after applying mapreducing ?
+
+hdfs dfs -cat /tmp/gutenberg/part*
+or
+hdfs dfs -cat /tmp/gutenberg/part-0000
+-----------------------------------------------------------------------------------
+4. how to delete the output file after applying mapducing?
+
+hdfs dfs -rm -r /tmp/gutenberg/
+
+-----------------------------------------------------------------------------------
+5. how to add 5 reducers manually while running ?
+
+
+add at the last -D mapred.reduce.tasks=5
+-----------------------------------------------------------------------------------
