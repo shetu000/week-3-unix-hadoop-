@@ -1,0 +1,121 @@
+project 1 link : https://github.com/AjaySingala/P2-MovieLens.git
+-------------------------------------------------------------------------------
+
+********url of download text files of books ********
+
+www.gutenberg.org/etex/20417
+
+(here you will get e-books in text format)
+copy the content of e-book and save it to a notepad
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+
+						HDFS Tutorial
+
+------------------------------------------------------------------------------------------------------------------------------------------
+
+#how to check files is present or not in hdfs? 
+
+hdfs dfs -ls (if it shows nothing than you have to create file using this command "hdfs dfs -mkdir myfile" and check in ambari file views-> users -> maria_dev)
+
+another command : hdfs dfs -ls /
+--------------------------------------------------------------------------------
+#how to create new files on hdfs?
+hdfs dfs -mkdir sdfile
+--------------------------------------------------------------------------------
+
+1. how to copy file in hdfs from local machine ?
+ hdfs dfs -copyFromLocal < path to file on local disk ><hdfs path>
+ hdfs dfs -copyFromLocal ./TheNoteBooksoftLoeonardoDaVinchi.txt /temp/gutenberg  [ if you want to go in root file than start with /temp/.........]
+ hdfs dfs -copyFromLocal ./dir1/sdfile.txt  /user/maria_dev              
+
+Note:-
+[source file(from local): ./dir1/sdfile.txt 
+  Destination (in hdfs system) : /user/maria_dev  ]
+
+-----------------------------------------------------------------------------------
+
+1. how to copy file in hdfs from local machine ?
+ hdfs dfs -put ./TheNoteBooksoftLoeonardoDaVinchi.txt /temp/gutenberg              [here './TheNoteBooksoftLoeonardoDaVinchi.txt ' this is file name/location of local machine and /temp/gutenberg is file location on hadoop where we going to  save this file]
+or
+ hdfs dfs -CopyFromLocal ./TheNoteBooksoftLoeonardoDaVinchi.txt  /temp/gutenberg
+
+--------------------------------------------------------------------------------
+
+1. how to copy file in local  from hdfs ?
+ hdfs dfs -get  <hdfs path> < path to file on local disk >
+ hdfs dfs -copyToLocal <hdfs path> < path to file on local disk >
+ hdfs dfs -moveFromLocal <hdfs path> < path to file on local disk >
+ hdfs dfs -get   /temp/gutenberg    ./TheNoteBooksoftLoeonardoDaVinchi.txt  
+ hdfs dfs -get   /user/maria_dev    ./dir1/sdfile.txt                
+
+Note:-
+[source file(from hdfs):/user/maria_dev  
+  Destination (local) :./dir1/sdfile.txt   ]
+
+----------------------------------------------------------------------------------
+
+1. how to copy file from hdfs to hdfs?
+ hdfs dfs -cp  <source file on hdfs path> < target file on hdfs path >
+ hdfs dfs -cp /user/maria_dev   /tmp/data/results.csv
+ hdfs dfs -mv  <source file on hdfs path> < target file on hdfs path >
+
+--------------------------------------------------------------------------
+#get size of hdfs files in a specific folder:-
+1.How to check the size of each file in a specific dir in hdfs ?
+
+hdfs dfs -du /<hdfs dir name>
+hdfs dfs -du /user/maria_dev
+--------------------------------------------------------------------------
+#get size of all files/folders in hdfs:-
+
+
+hdfs dfs -du -s /<hdfs dir name>
+hdfs dfs -du -s /temp
+hdfs dfs -dus /temp
+--------------------------------------------------------------------------
+#how to check last modified file date time in hdfs:-
+
+hdfs dfs -stat <dir name / folder name>
+hdfs dfs -stat /tmp
+--------------------------------------------------------------------------
+#replication factor change
+
+hdfs dfs -setrep 5 <path to file>
+hdfs dfs -setrep  -w 5 <path to file>
+	-w : wait till the replication is completed
+hdfs dfs -setrep -R  6 <path to file>
+	-R : Recursive 
+hdfs dfs -setrep -R -w 6 <path to file>
+	
+--------------------------------------------------------------------------
+2.how to download e-boook using maria_dev cmd?
+go to a particular folder than enter
+-> vi 5000-8.txt (here 5000-8.txt is file name)
+-> wget https://www.gutenberg.org/files/5000/5000-8.txt
+
+(it will download the e-book locally)
+
+------------------------------------------------------------------------------------
+3. how to see the output file content after applying mapreducing ?
+
+hdfs dfs -cat /tmp/gutenberg/part*
+or
+hdfs dfs -cat /tmp/gutenberg/part-0000
+-----------------------------------------------------------------------------------
+4. how to delete the output file after applying mapducing?
+
+hdfs dfs -rm -r <path to file/folder on hdfs>
+hdfs dfs -rm -r /tmp/gutenberg/
+	-r: recursive
+
+-----------------------------------------------------------------------------------
+5. how to add 5 reducers manually while running ?
+
+
+add at the last -D mapred.reduce.tasks=5
+-----------------------------------------------------------------------------------
+#acts like help
+ hdfs dfs
+------------------------------------------------------------------------------------

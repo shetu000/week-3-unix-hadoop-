@@ -1,0 +1,98 @@
+[30:00:00-
+
+
+
+**** vi editor ****
+ vi(VIM):
+	2 modes :
+		Edit mode
+		Command Mode
+	# how to switch to command mode : press Esc
+	# In command mode, to enter any command, press colon(:) and then enter the command.
+
+1. how to quit from vi editor in command mode?
+-> type :q
+
+2.how to open vi editor?
+->type ->vi
+----------------------------------------------------------------------------------
+2. how to open existing files in vi editor?
+type-> vi file.txt
+
+or
+(opens file in read mode only)
+type-> vi -R file.txt 
+------------------------------------------------------------------------------------
+
+2.how to insert new line in existing file content ?
+->there are two ways to do it
+a=> append after current character
+A=> Append after end of line
+
+i=> insert at current character position
+I=>insert at begining of line
+o=> insert line below curser
+O=> insert line above curser
+s=> (replace char under curser)delete current char under curser and remain in INSERT Mode
+S=>(replace current line) delete current line and remain in INSERT Mode
+r=> replace char at current curser position , does not remain in INSERT mode
+R=> replace line from curser point position onward , till  you switch to command mode.(you can enter multiple lines)
+shift + j => join two lines( next line ith the curser line)
+u=> undo last changes
+ctrl +r =>redo the changes
+h => move left
+l => move right
+k => move up
+j => move down
+^ => move cursor to beginning of curser line
+$ => move curser to end of current line
+:0 => jump to first line
+:10 => jumps to 10th line
+w =>  move to beginning of next word from current curser position
+e => move to end of next word from cuirrent character position
+b => move to beginning of previous word from current character position
+1w 2e 3b => jump words
+nw , ne , nb => jump "n " words
+x => delete character at current cursor position
+X => delete character previous to current curser position
+3x => delete 3 character
+3X => delete 3 character
+y => copy char at current cursor position
+P => paste copied char after curser position
+p =>paste copied char before curser position
+yy => (yank) copy char
+2dd => delete next 2 lines started from current line
+dw => delete word starting from current cursor position
+2dw => delete 2 words from cursor position
+/ abc => it searches abc from file content . from top to buttom (it searches forward)
+? abc => it searches the word 'abc' from backword
+:s/foo/bar => it will replace the word foo as bar in file content( but it will only replace first foo of file content)
+:%s/foo/bar/g => it will replace the word foo as bar in file content for all occurance ( g means globally)
+: %s/\<foo\>/bar/g =>
+		/gc =>confirmation
+		/gi => ignore cases 
+
+
+---------------------------------------------------------------------------------------
+3.how to switch command mode to edit mode?
+type i [ it will show like this this --insert-- , that means you are in edit mode]
+-------------------------------------------------------------------------------------
+4.how to replace a charcter?
+take curser under char to replace
+press DEL
+press i
+type new character and press ESC
+-------------------------------------------------------------------------------------------
+
+****Edit mode commands****
+(press Esc button from keyboard and write rest commands)
+
+1.Esc: w => for save file in edit mode
+2. Esc : w newfile.txt => creates a file named as newfile.txt
+3.Esc :wq => save files and quit from vi editor
+4. Esc:q! => override file content and quit vi / quit without save
+5.Esc :set nu => it will show line numbers
+6.Esc :edit files3.txt: first you have to open one file and than you have to type this command to change /edit the previous file
+7.Esc : 0 => it will jump to first line of text file
+
+---------------------------------------------------------------------------------------------
