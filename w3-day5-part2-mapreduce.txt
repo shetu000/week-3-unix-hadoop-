@@ -1,0 +1,68 @@
+Mapper function run command :
+ 		using text input : (type this command ) echo "this is rain . rain is good .this is a day" | python ./mapper.py|sort|python ./reducer.py 
+				     
+		using file input :
+				go to gutenberg link and copy one book content in a notepad and save it in your local machine(thenotebook.txt). 
+				gutenberg link :www.gutenberg.org/etex/20417
+				type the below command:
+						cat thenotebook.txt | python ./mapper.py|sort|python ./reducer.py 
+
+		Run map reduce in hadoop for parallel processing :
+				copy the text book file(thenotebook.txt) on hdfs :[ hdfs dfs -put ./thenotebook.txt <destination path :hdfs path>][ hdfs dfs -put ./thenotebook.txt /home/maria_dev]
+				another way :
+						download on local : go to a particular folder on vm(ex-dir1) -> wget https://www.gutenberg.org/files/5000/5000-8.txt
+						check the downloaded text file : vi 5000-8.txt
+				run this entire command :
+						hadoop jar /user/hdp/current/hadoop-mapreduce-client/hadoop-streaming-2.7.3.2.6.5.0-292.jar\
+						-file /home/maria_dev/pythonSamples/mapper.py	-mapper/home/maria_dev/pythonSamples/mapper.py\
+						-file /home/maria_dev/pythonSamples/reducer.py	-reducer/home/maria_dev/pythonSamples/reducer.py\
+						-input /tmp/gutenberg/* -output/tmp/gutenberg-output
+
+				or run this entire command if you want to set your own number of reducers to complete the job(here in case it is 5):
+						hadoop jar /user/hdp/current/hadoop-mapreduce-client/hadoop-streaming-2.7.3.2.6.5.0-292.jar\
+						-file /home/maria_dev/pythonSamples/mapper.py	-mapper/home/maria_dev/pythonSamples/mapper.py\
+						-file /home/maria_dev/pythonSamples/reducer.py	-reducer/home/maria_dev/pythonSamples/reducer.py\
+						-input /tmp/gutenberg/* -output/tmp/gutenberg-output -numReduceTasks 5
+						
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+********Hadoop***********
+
+Hadoop Input Format:
+		FileInputFormat
+		TextInputFormat
+				each line is seperated record
+		KeyValueTextInputFormat
+				KV pair
+				key/value
+				For Example:
+					name    ajay
+					lastname  roy
+					city     mumbai
+		SequenceFileInput:
+				address   1020,some building name, Mg road , mumbai ,4000076
+				<key>     <value>
+		SequenceFileasTextInputFormat:
+				converts the keys and values as text , initially calls tostring() function
+		SequenceFileAsBinaryInputFormat:
+				converts keys and values as binary objects
+		NLineInputFormat:
+				key value paires
+				key is located at a specific byte offset on the line
+				N=1
+		DBInputFormat:
+				read data from a RDBMS
+				JDBC connector
+
+Hadoop Output Format:
+		TextOutputFormat
+		MapFileOutputFormat
+		SequenceFileOutputFormat
+		SequenceFileAsOutputFormat
+		DBOutputFormat
+		MultipleOutputs
+		LazyOutputFormat
+		
+						
+
+							
+						
